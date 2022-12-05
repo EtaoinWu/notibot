@@ -48,7 +48,7 @@ async def main():
     async def hello(request):
         return web.Response(text="Hello, world")
 
-    @routes.post("/new_notification")
+    @routes.post("/new_notification" + config["webhook"]["token"])
     async def new_notification(request):
         json = await request.json()
         title = json["title"]
