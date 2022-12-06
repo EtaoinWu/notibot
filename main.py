@@ -5,7 +5,7 @@ from pyrogram import Client, filters, enums
 from aiohttp import web
 from datetime import datetime
 import html
-import uvloop
+
 
 config = ConfigParser()
 config.read("config.ini")
@@ -72,5 +72,10 @@ async def main():
     await pyrogram.idle()
     await tg.stop()
 
-uvloop.install()
+try:
+    import uvloop
+    uvloop.install()
+except ImportError:
+    pass
+
 asyncio.run(main())
