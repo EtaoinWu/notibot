@@ -40,4 +40,4 @@ class PushsaferHandler(handler.Handler):
                 "s": "0",
             },
         ) as resp:
-            logging.info(f"response status: {resp.status}")
+            logging.info(f"response code {resp.status}: {await resp.text()}")

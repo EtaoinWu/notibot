@@ -6,7 +6,7 @@ from aiohttp import web
 from datetime import datetime
 import html
 import logging
-from handlers import pushsafer, tgbot
+from handlers import pushsafer, tgbot, gotify
 
 logging.basicConfig(
     level=logging.INFO, format="[{filename} @ {asctime}] {levelname}: {message}", style='{',
@@ -21,11 +21,12 @@ webhook_port = config["webhook"]["port"]
 
 pushsafer_handler = pushsafer.PushsaferHandler(config["pushsafer"])
 telegram_handler = tgbot.TelegramBotHandler(config["telegram"])
-handlers = [pushsafer_handler, telegram_handler]
+gotify_handler = gotify.GotifyHandler(config["gotify"])
+handlers = [pushsafer_handler, telegram_handler, gotify_handler]
 
 async def main():
-    await pushsafer_handler.initialize()
-    await telegram_handler.initialize()
+    for handler in handlers:
+        await handler.initialize()
 
     http = web.Application()
     routes = web.RouteTableDef()

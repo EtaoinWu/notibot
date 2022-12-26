@@ -25,7 +25,6 @@ pushsafer:
 gotify:
   url: https://push.example.com
   token: ABCDEFGHIJ
-
-gotify_priority:
-  QQ: 3
-  Telegram: 4
+  priority:
+    QQ: 3
+    Telegram: 4
