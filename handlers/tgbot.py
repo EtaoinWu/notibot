@@ -23,7 +23,7 @@ class TelegramBotHandler(handler.Handler):
             api_id=self.config["api_id"],
             api_hash=self.config["api_hash"],
             bot_token=self.config["bot_token"],
-            proxy=self.config["proxy"],
+            proxy=self.config.get('proxy'),
         )
         
         @self.bot.on_message(filters.command("getid"))
