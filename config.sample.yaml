@@ -1,0 +1,32 @@
+webhook:
+  hostname: '127.0.0.1'
+  port: 12345
+  token: VERYRANDOMSTRINGHERE
+
+pyrogram:
+  api_id: 123456
+  api_hash: 1234567890abcdef1234567890abcdef
+  bot_token: 123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11
+  chat_id: 12345678
+
+proxy:
+  # scheme: socks5
+  # hostname: '127.0.0.1'
+  # port: 8080
+  # # username: user
+  # # password: pw
+
+pushsafer:
+  private_key: 3SAz1a2iTYsh19eXIMiO
+
+pushsafer_icon_map:
+  QQ: 1
+  Telegram: 2
+
+gotify:
+  url: https://push.example.com
+  token: ABCDEFGHIJ
+
+gotify_priority:
+  QQ: 3
+  Telegram: 4

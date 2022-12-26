@@ -1,8 +1,10 @@
 config.ini
+config.yaml
 
 .vscode
 
 *.session
+*.session-journal
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

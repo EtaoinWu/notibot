@@ -1,4 +1,4 @@
-from configparser import ConfigParser
+import yaml
 import asyncio
 import pyrogram
 from pyrogram import Client, filters, enums
@@ -7,29 +7,19 @@ from aiohttp import web
 from datetime import datetime
 import html
 
-
-config = ConfigParser()
-config.read("config.ini", encoding="utf-8")
+# load from config.yaml
+with open("config.yaml", "r", encoding="utf-8") as f:
+    config = yaml.safe_load(f)
 
 webhook_host = config["webhook"]["hostname"]
-webhook_port = config.getint("webhook", "port")
+webhook_port = config["webhook"]["port"]
 
-pushsafer_key = config["pushsafer"].get("private_key", None)
+pushsafer_key = config["pushsafer"].get("private_key", None) if config["pushsafer"] else None
 pushsafer_icon_map = config["pushsafer_icon_map"]
 
 proxy_dict = None
-if config.has_section("proxy"):
-    proxy_dict = {
-        "scheme": config["proxy"]["scheme"],
-        "hostname": config["proxy"]["hostname"],
-        "port": int(config["proxy"]["port"]),
-        "username": config["proxy"].get("username", None),
-        "password": config["proxy"].get("password", None),
-    }
-    if proxy_dict["username"] is None:
-        del proxy_dict["username"]
-    if proxy_dict["password"] is None:
-        del proxy_dict["password"]
+if "proxy" in config:
+    proxy_dict = config["proxy"]
 
 
 async def main():
@@ -66,7 +56,7 @@ async def main():
         await tg.send_message(
             config["pyrogram"]["chat_id"], message, parse_mode=enums.ParseMode.HTML
         )
-        if app in pushsafer_icon_map and pushsafer_key is not None:
+        if pushsafer_key is not None and app in pushsafer_icon_map:
             async with pushsafer_session.post(
                 "/api",
                 data={
