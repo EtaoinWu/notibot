@@ -3,7 +3,7 @@ webhook:
   port: 12345
   token: VERYRANDOMSTRINGHERE
 
-pyrogram:
+telegram:
   api_id: 123456
   api_hash: 1234567890abcdef1234567890abcdef
   bot_token: 123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11
@@ -18,10 +18,9 @@ proxy:
 
 pushsafer:
   private_key: 3SAz1a2iTYsh19eXIMiO
-
-pushsafer_icon_map:
-  QQ: 1
-  Telegram: 2
+  icon_map:
+    QQ: 1
+    Telegram: 2
 
 gotify:
   url: https://push.example.com
