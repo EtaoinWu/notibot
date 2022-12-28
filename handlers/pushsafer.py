@@ -17,9 +17,12 @@ class PushsaferHandler(handler.Handler):
         logging.debug(f"Initializing with config: {self.config}")
         self.session = aiohttp.ClientSession('https://www.pushsafer.com')
     
-    async def handle(self, payload):
+    async def handle(self, payload, type = None):
         """Handle request"""
         if self.key is None:
+            return
+        
+        if type is not None:
             return
         
         title = payload["title"]

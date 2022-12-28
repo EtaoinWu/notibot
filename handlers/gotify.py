@@ -25,6 +25,9 @@ class GotifyHandler(handler.Handler):
         """Handle request"""
         if self.token is None:
             return
+
+        if type is not None:
+            return
         
         title = payload["title"]
         text = payload["text"]

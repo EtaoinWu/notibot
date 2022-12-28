@@ -9,6 +9,6 @@ class Handler(abc.ABC):
         pass
 
     @abc.abstractmethod
-    async def handle(self, payload):
+    async def handle(self, payload, type = None):
         """Handle request"""
         pass

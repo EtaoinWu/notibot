@@ -43,6 +43,13 @@ async def main():
             await handler.handle(json)
         return web.Response(text="OK")
 
+    @routes.post("/uptime_hook" + config["webhook"]["token_uptime"])
+    async def uptime_hook(request):
+        json = await request.json()
+        for handler in handlers:
+            await handler.handle(json, type="uptime")
+        return web.Response(status=204, text=None)
+
     http.add_routes(routes)
     runner = web.AppRunner(http)
     await runner.setup()

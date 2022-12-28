@@ -29,10 +29,23 @@ class TelegramBotHandler(handler.Handler):
         @self.bot.on_message(filters.command("getid"))
         async def getid(client, message):
             await message.reply_text(message.chat.id)
+    
+    async def uptime(self, payload):
+        """Handle Uptime Info"""
+        if self.config is None or self.config["uptime_chat_id"] is None:
+            return
+        text = payload["content"]
+        await self.bot.send_message(
+            self.config["uptime_chat_id"], text
+        )
 
-    async def handle(self, payload):
+    async def handle(self, payload, type = None):
         """Handle request"""
         if self.config is None:
+            return
+
+        if type == "uptime":
+            await self.uptime(payload)
             return
         
         title = payload["title"]
