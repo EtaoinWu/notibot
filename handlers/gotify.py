@@ -21,7 +21,7 @@ class GotifyHandler(handler.Handler):
             headers={"X-Gotify-Key": self.token}, timeout=aiohttp.ClientTimeout(total=10)
         )
     
-    async def handle(self, payload):
+    async def handle(self, payload, type = None):
         """Handle request"""
         if self.token is None:
             return
